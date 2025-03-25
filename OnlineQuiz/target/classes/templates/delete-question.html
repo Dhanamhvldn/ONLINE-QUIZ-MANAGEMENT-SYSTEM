@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Delete Questions</title>
+    <style>
+        /* Use similar styles as the Create Quiz page */
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+	<h1>delete Question</h1>
+	   <form action="/delete-question/{id}" method="post">
+	       <input type="hidden" th:value="${question.id}" name="id"/>
+
+	       <label for="question">Question:</label><br>
+	       <input type="text" id="question" name="question" th:value="${question.text}" required><br>
+
+	       <label for="optionA">Option A:</label><br>
+	       <input type="text" id="optionA" name="optionA" th:value="${question.optionA}" required><br>
+
+	       <label for="optionB">Option B:</label><br>
+	       <input type="text" id="optionB" name="optionB" th:value="${question.optionB}" required><br>
+
+	       <label for="optionC">Option C:</label><br>
+	       <input type="text" id="optionC" name="optionC" th:value="${question.optionC}"><br>
+
+	       <label for="optionD">Option D:</label><br>
+	       <input type="text" id="optionD" name="optionD" th:value="${question.optionD}"><br>
+
+	       <label for="correctAnswer">Correct Answer:</label><br>
+	       <select id="correctAnswer" name="correctAnswer" required>
+	           <option value="optionA" th:selected="${question.correctAnswer == 'optionA'}">Option A</option>
+	           <option value="optionB" th:selected="${question.correctAnswer == 'optionB'}">Option B</option>
+	           <option value="optionC" th:selected="${question.correctAnswer == 'optionC'}">Option C</option>
+	           <option value="optionD" th:selected="${question.correctAnswer == 'optionD'}">Option D</option>
+	       </select><br>
+
+	       <button type="submit">Save Changes</button>
+	   </form>
+	
+   </body>
+</html>

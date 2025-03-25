@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Edit Quiz</title>
+<style>
+/* Add styles similar to the dashboard */
+</style>
+</head>
+<body>
+	<h1>Edit an Existing Quiz</h1>
+	<form action="/update-quiz" method="post">
+		<label for="quizId">Select Quiz to Edit:</label>
+		<select id="quizId" name="quizId">
+			<option value="1">Quiz 1</option>
+			<option value="2">Quiz 2</option>
+			<!-- Populate dynamically -->
+		</select><br><br>
+		<button type="submit" class="btn">Edit Quiz</button>
+	</form>
+</body>
+</html>

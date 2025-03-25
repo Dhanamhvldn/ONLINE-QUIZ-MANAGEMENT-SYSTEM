@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Question</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label, select, input, button {
+            display: block;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add a New Question</h1>
+    <form th:action="@{/save-question}" method="post" th:object="${question}">
+        <label for="quiz">Select Quiz:</label>
+        <select id="quiz" name="quiz.id" required>
+            <option value="" disabled selected>Select a quiz</option>
+            <th:block th:each="quiz : ${quizList}">
+                <option th:value="${quiz.id}" th:text="${quiz.title}"></option>
+            </th:block>
+        </select>
+
+        <label for="question">Question:</label>
+        <input type="text" id="question" th:field="*{question}" required>
+
+        <label for="optionA">Option A:</label>
+        <input type="text" id="optionA" th:field="*{optionA}" required>
+
+        <label for="optionB">Option B:</label>
+        <input type="text" id="optionB" th:field="*{optionB}" required>
+
+        <label for="optionC">Option C:</label>
+        <input type="text" id="optionC" th:field="*{optionC}">
+
+        <label for="optionD">Option D:</label>
+        <input type="text" id="optionD" th:field="*{optionD}">
+
+        <label for="correctAnswer">Correct Answer:</label>
+        <select id="correctAnswer" th:field="*{correctoption}" required>
+            <option value="" disabled selected>Select the correct option</option>
+            <option value="optionA">Option A</option>
+            <option value="optionB">Option B</option>
+            <option value="optionC">Option C</option>
+            <option value="optionD">Option D</option>
+        </select>
+
+        <button type="submit">Save Question</button>
+    </form>
+</body>
+</html>

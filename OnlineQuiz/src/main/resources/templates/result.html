@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quiz Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .result-container {
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .details {
+            margin: 10px 0;
+        }
+        .btn {
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h1>Quiz Result</h1>
+        <p class="score">Your Score: <span th:text="${score}"></span> / <span th:text="${totalQuestions}"></span></p>
+        <p class="details">Questions Attempted: <span th:text="${questionsAttempted}"></span></p>
+        <p class="details">Time Taken: <span th:text="${timeTaken}"></span></p>
+        <a href="/quiz-list" class="btn">Back to Quiz List</a>
+    </div>
+</body>
+</html>

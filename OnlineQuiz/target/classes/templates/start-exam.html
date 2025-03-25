@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Start Exam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .timer {
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+        }
+        .btn {
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz: <span th:text="${quiz.title}"></span></h1>
+    
+    <div class="timer">
+        Time Remaining: <span id="timer"></span>
+    </div>
+
+	<form action="/result-quiz" method="POST">
+	    <!-- Add a hidden field to include quizId -->
+	    <input type="hidden" th:name="quizId" th:value="${quiz.id}" />
+
+	    <div th:each="question : ${quiz.questions}">
+	        <div class="question">
+	            <p th:text="${question.question}"></p>
+	            <div>
+	                <input type="radio" th:id="'optionA-' + ${question.id}" th:name="'question-' + ${question.id}" th:value="'A'" />
+	                <label th:for="'optionA-' + ${question.id}" th:text="${question.optionA}"></label><br/>
+
+	                <input type="radio" th:id="'optionB-' + ${question.id}" th:name="'question-' + ${question.id}" th:value="'B'" />
+	                <label th:for="'optionB-' + ${question.id}" th:text="${question.optionB}"></label><br/>
+
+	                <input type="radio" th:id="'optionC-' + ${question.id}" th:name="'question-' + ${question.id}" th:value="'C'" />
+	                <label th:for="'optionC-' + ${question.id}" th:text="${question.optionC}"></label><br/>
+
+	                <input type="radio" th:id="'optionD-' + ${question.id}" th:name="'question-' + ${question.id}" th:value="'D'" />
+	                <label th:for="'optionD-' + ${question.id}" th:text="${question.optionD}"></label><br/>
+	            </div>
+	        </div>
+	    </div>
+
+	    <button type="submit" class="btn">Submit</button>
+	</form>
+
+
+    <script>
+        // Timer logic
+        var timeRemaining = 600; // 10 minutes (in seconds)
+        var timerElement = document.getElementById("timer");
+
+        function updateTimer() {
+            var minutes = Math.floor(timeRemaining / 60);
+            var seconds = timeRemaining % 60;
+            timerElement.textContent = minutes + "m " + seconds + "s";
+            if (timeRemaining <= 0) {
+                clearInterval(timerInterval);
+                alert("Time is up!");
+                document.querySelector("form").submit(); // Auto-submit form when time is up
+            }
+            timeRemaining--;
+        }
+
+        var timerInterval = setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>

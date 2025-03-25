@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Question</title>
+    <style>
+        form {
+            width: 50%;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Question</h1>
+    <form th:action="@{'/update-question'}" method="post">
+        <input type="hidden" th:name="id" th:value="${question.id}" />
+        <label for="question">Question:</label>
+        <input type="text" id="question" th:name="question" th:value="${question.question}" required />
+
+        <label for="optionA">Option A:</label>
+        <input type="text" id="optionA" th:name="optionA" th:value="${question.optionA}" required />
+
+        <label for="optionB">Option B:</label>
+        <input type="text" id="optionB" th:name="optionB" th:value="${question.optionB}" required />
+
+        <label for="optionC">Option C:</label>
+        <input type="text" id="optionC" th:name="optionC" th:value="${question.optionC}" required />
+
+        <label for="optionD">Option D:</label>
+        <input type="text" id="optionD" th:name="optionD" th:value="${question.optionD}" required />
+
+        <label for="correctoption">Correct Option:</label>
+        <select id="correctoption" th:name="correctoption" th:value="${question.correctoption}">
+            <option th:value="optionA" th:selected="${question.correctoption == 'optionA'}">Option A</option>
+            <option th:value="optionB" th:selected="${question.correctoption == 'optionB'}">Option B</option>
+            <option th:value="optionC" th:selected="${question.correctoption == 'optionC'}">Option C</option>
+            <option th:value="optionD" th:selected="${question.correctoption == 'optionD'}">Option D</option>
+        </select>
+		
+        <button type="submit">Update Question</button>
+    </form>
+</body>
+</html>
